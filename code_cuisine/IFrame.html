@@ -16,7 +16,7 @@
             //execute window.onmessage when receive message from page code (postMessage)
             window.onmessage = (event) => {
                 if (event.data) {
-                    datas = event.data.Arr;
+                    let datas = event.data.Arr;
                     var map = new google.maps.Map(
                         document.getElementById('map'),
                         {
@@ -49,22 +49,27 @@
                             });
                         }
                     }
-                    function addNumMarker(input, index) {
+                    function addNumMarker(props, index) {
                         var geocoder = new google.maps.Geocoder();
                         var geo_base = 'https://maps.googleapis.com/maps/api/geocode/json';
                         var geo_key = 'key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY';
-                        var address = geo_base + '?address=' + input.address + '&' + geo_key;
+                        var address = geo_base + '?address=' + props.address + '&' + geo_key;
                         geocoder.geocode({ 'address': address }, function (results, status) {
                             if (status == 'OK') {
                                 //map.setZoom(12);
                                 var data = {
                                     coords: results[0].geometry.location,
-                                    content: input.name,
+                                    content: props.name,
                                     iconImage: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + index + '|FF0000|000000' // hex color of the marker and font
                                 }
                                 addMarker(data);
                             } else {
-                                alert('Geocode was not successful for the following reason: ' + status);
+                                var data = {
+                                    coords: { lat: 25.0360, lng: 121.5640 },
+                                    content: status,
+                                    iconImage: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + index + '|FF0000|000000' // hex color of the marker and font
+                                }
+                                addMarker(data);
                             }
                         });
 

@@ -1,6 +1,6 @@
 //cuisine
 import { get_collection } from 'backend/get_query.jsw';
-let collection_id = "my44_10datas";
+let collection_id = "mine44_ten";
 
 $w.onReady(function () {
 	let dropdown_value = $w("#dropdown1").value;	
@@ -12,6 +12,7 @@ export function dropdown1_change(event) {
 }
 export function update_page(dropdown_value, collection_id) {
 	get_collection(collection_id).then((obj) => {
+		console.log(obj);
 		let obj_size = obj["items"].length;
 		let style = obj["items"].map((item) => { return item["style"] });
 		let name = obj["items"].map((item) => { return item["name"] });
@@ -19,11 +20,12 @@ export function update_page(dropdown_value, collection_id) {
 		let address = obj["items"].map((item) => { return item["address"] });
 		//Organize as array of Object
 		let Arr = [];
+		let index = 0;
 		for (let i = 0; i < obj_size; i++) {
 			if (style[i] === dropdown_value) {
-				let index_str = i.toString();
+				index = index + 1;
 				let data = {
-					index: index_str
+					index: index,
 					style: style[i],
 					name: name[i],
 					url: url[i],
@@ -35,26 +37,9 @@ export function update_page(dropdown_value, collection_id) {
 		//push to html
 		$w('#html1').postMessage({ Arr });
 		//push to table
-		/*
-		let tableRows = [
-			{
-				"index": "John",
-				"chinese": "Doe",
-				"name": "john.doe@somedomain.com",
-				"link": "http://someImageUrl/john.jpg",
-				"address": "幹靠背"
-			},
-			{
-				"index": "Tony",
-				"chinese": "Doe",
-				"name": "john.doe@somedomain.com",
-				"link": "http://someImageUrl/john.jpg",
-				"address": "dd"
-			}
-		] */
-		//$w("#myTable").rows = Arr;
+		let table_id = "#table1";
+		$w(table_id).rows = Arr;
 
-		/*
 		//push to text
 		let final_text = '<Detail lists below>' + '\n' + 'Restaurant name, website' + '\n\n';
 		let order = 0;
@@ -67,6 +52,5 @@ export function update_page(dropdown_value, collection_id) {
 			}
 		}
 		$w("#textTPE").text = final_text;
-		*/
 	});
 }
