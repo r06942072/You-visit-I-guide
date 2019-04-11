@@ -1,5 +1,5 @@
-//pass information as the form array of json object to IFrame
-//JavaScript Object Literal
+//Infos
+import wixLocation from 'wix-location';
 import { get_collection } from 'backend/get_query.jsw';
 import { save_32 } from 'backend/save2db.jsw';
 import { save_test } from 'backend/save2db.jsw';
@@ -7,6 +7,9 @@ import { save_test } from 'backend/save2db.jsw';
 let collection_id = "my8";
 
 $w.onReady(function () {
+	let path = '>  ';
+	path = path + wixLocation.path[0]; //not the full url just everything after the first /
+	$w('#textBread').text = path;
 	get_collection(collection_id).then((obj) => {
 		let Arr = [];
 		let obj_size = obj["items"].length;
@@ -26,9 +29,6 @@ $w.onReady(function () {
 	});
 
 	save_test();
-	
-	let my32 = save_32();
-	$w("#text41").text = my32;
-	console.log(my32);
+
 });
 

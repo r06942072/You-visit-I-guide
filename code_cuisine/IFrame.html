@@ -26,8 +26,8 @@
                     );
                     //Markers
                     for (let i = 0; i < datas.length; i++) {
-                        sleep(500);
-                        addNumMarker(datas[i], i + 1);
+                        setTimeout(addNumMarker(datas[i], i + 1), 1000);
+                       // addNumMarker(datas[i], i + 1);
                     }
                     //map, coords, content, iconImage
                     function addMarker(props) {
@@ -73,14 +73,14 @@
                                 addMarker(data);
                             }
                         });
-
+                    }
+                    function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
                     }
                 }
             }
         }//end of init()
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
+
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY&callback=init"></script>

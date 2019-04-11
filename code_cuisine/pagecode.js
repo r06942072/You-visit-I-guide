@@ -1,8 +1,12 @@
 //cuisine
+import wixLocation from 'wix-location';
 import { get_collection } from 'backend/get_query.jsw';
 let collection_id = "mine44_ten";
 
 $w.onReady(function () {
+	let path = '>  ';
+	path = path + wixLocation.path[0]; //not the full url just everything after the first /
+	$w('#textBread').text = path;
 	let dropdown_value = $w("#dropdown1").value;	
 	update_page(dropdown_value, collection_id);
 });
