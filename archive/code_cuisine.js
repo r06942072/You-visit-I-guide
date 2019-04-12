@@ -18,6 +18,8 @@ export function update_page(dropdown_value, collection_id) {
 		let name = obj["items"].map((item) => { return item["name"] });
 		let url = obj["items"].map((item) => { return item["url"] });
 		let address = obj["items"].map((item) => { return item["address"] });
+		let icon_website = obj["items"].map((item) => { return item["icon_website"] });
+		let icon_gmap = obj["items"].map((item) => { return item["icon_gmap"] });
 		//array of Object
 		let Arr = [];
 		let index = 0;
@@ -29,7 +31,9 @@ export function update_page(dropdown_value, collection_id) {
 					style: style[i],
 					name: name[i],
 					url: url[i],
-					address: address[i]
+					address: address[i],
+					icon_website: icon_website[0],
+					icon_gmap: icon_gmap[0]
 				};
 				Arr.push(data);
 			}
@@ -39,27 +43,21 @@ export function update_page(dropdown_value, collection_id) {
 		//push to table
 		let table_id = "#table1";
 		$w(table_id).rows = Arr;
-		//set icon_website and icon_gmap
-		link2img(Arr);
 	});
 }
-export function link2img(Arr) {
+/*
+export function add_link(Arr) {
+	//let a = query_icon(icon_website);
+	//icon_gmap
+	//console.log(typeof(a));
+	console.log(Arr);
+	//set icon_website and icon_gmap
 	for (let i = 0; i < Arr.length; i++) {
-		//Arr[0] -> image1 and image11
-		//Arr[1] -> image2 and image12
-		let base = 10
-		let id_website = '#image' + (i + 1).toString();
-		let id_gmap = '#image' + (i + base + 1).toString();
-		let link_website = Arr[i].url;
-		let link_gmap = 'http://maps.google.com/?q=' + Arr[i].address;
-		add_link(id_website, link_website);
-		add_link(id_gmap, link_gmap);
+		let id = '#image' + (i + 1).toString();
+		let link = Arr[i].url;
+		$w(id).link = link;
 	}
 }
-export function add_link(id, link) {
-	$w(id).link = link;
-}
-/*
 export function query_icon(field_key) {
 	wixData.query("cuisine_table")
 		.contains(field_key)
