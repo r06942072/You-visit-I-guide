@@ -29,6 +29,13 @@
                         //setTimeout(addNumMarker(datas[i], i + 1), 1000);
                         addNumMarker(datas[i], i + 1);
                     }
+                    /*
+                    var image_set={
+                        "Botega del vin":'<image class="image info" src= "https://www.google.com/maps/uv?hl=zh-TW&pb=!1s0x3442abcf5eec691b:0xafe8d9ff357f12a5!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4shttps://lh5.googleusercontent.com/p/AF1QipPNMImkXBbdKaUgGum61V0nkzPr3_IVCTW3mdYk%3Dw266-h200-k-no!5sBotega+del+vin+-+Google+%E6%90%9C%E5%B0%8B&imagekey=!1e10!2sAF1QipPNMImkXBbdKaUgGum61V0nkzPr3_IVCTW3mdYk&sa=X&ved=2ahUKEwj-uNKY483hAhXEnOAKHUnYB3kQoiowCnoECA0QBg#"></images>',
+                        "Cova Taiwan" : '<image class="image info" src = "https://www.petmd.com/sites/default/files/Acute-Dog-Diarrhea-47066074.jpg"></image>',
+                        "EL AMOR 西班亞 TAPAS & BAR" : '<image class="image info" src = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fpic.pimg.tw%2Froyalflorence%2F1502881684-2945051746.jpg&imgrefurl=http%3A%2F%2Froyalflorence.pixnet.net%2Fblog%2Fpost%2F400561778-%255B%25E9%25A3%259F%25E8%25A8%2598%255D-%25E5%258F%25B0%25E5%258C%2597%25E5%25A4%25A7%25E5%25AE%2589-%2528%25E7%258F%25BE%25E5%25B7%25B2%25E6%2590%25AC%25E5%2588%25B0%25E4%25B8%25AD%25E5%25B1%25B1%25E5%258D%2580%2529-el-amor-%25E8%25A5%25BF%25E7%258F%25AD&docid=bs8bz9qzVYf7NM&tbnid=1QvNeuP9xvE8fM%3A&vet=10ahUKEwiwre6f783hAhURTt8KHdYaCVUQMwhCKAMwAw..i&w=1000&h=563&bih=722&biw=1536&q=EL%20AMOR%20%E8%A5%BF%E7%8F%AD%E4%BA%9E%20TAPAS%20%26%20BAR&ved=0ahUKEwiwre6f783hAhURTt8KHdYaCVUQMwhCKAMwAw&iact=mrc&uact=8"></image>'
+                    }
+                    */
                     //map, coords, content, iconImage
                     function addMarker(props) {
                         var marker = new google.maps.Marker({
@@ -40,7 +47,8 @@
                         }
                         if (props.content) {
                             var infoWindow = new google.maps.InfoWindow({
-                                content: props.content
+                                content: props.content 
+                                // + image_set[props.content]
                             });
                             marker.addListener('mouseover', function () {
                                 infoWindow.open(map, marker);
@@ -50,6 +58,7 @@
                             });
                         }
                     }
+                    
                     function addNumMarker(props, index) {
                         var geocoder = new google.maps.Geocoder();
                         var geo_base = 'https://maps.googleapis.com/maps/api/geocode/json';
