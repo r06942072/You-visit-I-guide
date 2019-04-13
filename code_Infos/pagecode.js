@@ -1,7 +1,5 @@
 //Infos
 import { get_collection } from 'backend/get_query.jsw';
-import { save_32 } from 'backend/save2db.jsw';
-import { save_test } from 'backend/save2db.jsw';
 
 let collection_id = "my8";
 
@@ -23,8 +21,5 @@ $w.onReady(function () {
 		}
 		$w('#html1').postMessage({ Arr });
 	});
-
-	save_test();
-
 });
 

@@ -65,7 +65,20 @@
                                 //map.setZoom(12);
                                 addMarker(data);
                             } else if (status == 'OVER_QUERY_LIMIT') {
-                                setTimeout(addMarker(data), 2000);
+                                //setTimeout(function () {}, 1000);
+                                var geocoder2 = new google.maps.Geocoder();
+                                var geo_base = 'https://maps.googleapis.com/maps/api/geocode/json';
+                                //key from formosa94taiwan
+                                var geo_key = 'key=AIzaSyBllYag49x6UKEEPZ6OVEI1-u6lmckQTto';
+                                var address = geo_base + '?address=' + props.address + '&' + geo_key;
+                                geocoder2.geocode({ 'address': address }, function (results, status) {
+                                    var data = {
+                                        coords: results[0].geometry.location,
+                                        content: props.name,
+                                        iconImage: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + index + '|FF0000|000000' // hex color of the marker and font
+                                    }
+                                });
+                                addMarker(data);
                             }
                             else {
                                 var data = {
@@ -86,7 +99,7 @@
 
     </script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY&callback=init"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY&callback=init&language=de"></script>
 </body>
 
 </html>

@@ -47,7 +47,7 @@ export function link2img(Arr) {
 	for (let i = 0; i < Arr.length; i++) {
 		//Arr[0] -> image1 and image11
 		//Arr[1] -> image2 and image12
-		let base = 10
+		let base = 10;
 		let id_website = '#image' + (i + 1).toString();
 		let id_gmap = '#image' + (i + base + 1).toString();
 		let link_website = Arr[i].url;
@@ -76,8 +76,6 @@ export function push2json(json) {
 	return final_json;
 }
 */
-
-
 /*
 //push to text
 let final_text = '<Detail lists below>' + '\n' + 'Restaurant name, website' + '\n\n';
