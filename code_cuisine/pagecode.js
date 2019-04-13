@@ -51,7 +51,7 @@ export function link2img(Arr) {
 		let id_website = '#image' + (i + 1).toString();
 		let id_gmap = '#image' + (i + base + 1).toString();
 		let link_website = Arr[i].url;
-		let link_gmap = 'http://maps.google.com/?q=' + Arr[i].address;
+		let link_gmap = 'http://maps.google.com/?q=' + Arr[i].name;
 		add_link(id_website, link_website);
 		add_link(id_gmap, link_gmap);
 	}
