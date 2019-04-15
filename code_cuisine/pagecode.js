@@ -1,6 +1,8 @@
 //cuisine
 import wixData from 'wix-data';
 import { get_collection } from 'backend/get_query.jsw';
+import wixWindow from 'wix-window';
+
 let collection_id = "mine44_ten";
 
 $w.onReady(function () {
@@ -11,6 +13,7 @@ export function dropdown1_change(event) {
 	let dropdown_value = $w("#dropdown1").value;
 	update_page(dropdown_value, collection_id);
 }
+/////////////////////////////////////////////////////////////////////
 export function update_page(dropdown_value, collection_id) {
 	get_collection(collection_id).then((obj) => {
 		let obj_size = obj["items"].length;
@@ -37,10 +40,16 @@ export function update_page(dropdown_value, collection_id) {
 		//push to html
 		$w('#html1').postMessage({ Arr });
 		//push to table
-		let table_id = "#table1";
-		$w(table_id).rows = Arr;
-		//set icon_website and icon_gmap
-		link2img(Arr);
+		if (wixWindow.formFactor === "Mobile") {
+			let table_id = '#tableMobile';
+			$w(table_id).show();
+			push_table_mobile(table_id, Arr);
+		}
+		else {
+			let table_id = '#tableDesktop';
+			$w(table_id).show();
+			push_table_desktop(table_id, Arr);
+		}
 	});
 }
 export function link2img(Arr) {
@@ -58,6 +67,15 @@ export function link2img(Arr) {
 }
 export function add_link(id, link) {
 	$w(id).link = link;
+}
+export function push_table_desktop(str, Arr) {
+	let table_id = str;
+	$w(table_id).rows = Arr;
+	link2img(Arr);
+}
+export function push_table_mobile(str, Arr) {
+	let table_id = str;
+	$w(table_id).rows = Arr;
 }
 /*
 export function query_icon(field_key) {
