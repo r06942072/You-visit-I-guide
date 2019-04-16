@@ -35,15 +35,15 @@
                     //Legends
                     var icons = {
                         good: {
-                            name: 'Gut :)',
+                            name: 'Good :)',
                             iconLink: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
                         },
                         soso: {
-                            name: 'Ausreichend :|',
+                            name: 'So-so :|',
                             iconLink: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
                         },
                         bad: {
-                            name: 'Schlect :(',
+                            name: 'Bad :(',
                             iconLink: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
                         }
                     };
@@ -90,7 +90,7 @@
                     function get_iconImage(psi) {
                         let iconLink = '';
                         if (psi <= 50) {
-                            iconLink = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
+                            iconLink = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
                         }
                         else if ((psi > 50) && (psi <= 100)) {
                             iconLink = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
@@ -105,7 +105,7 @@
         }
     </script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY&callback=init&language=de">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY&callback=init&language=en">
         </script>
 </body>
 </html>

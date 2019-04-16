@@ -1,26 +1,28 @@
 <html>
+
 <head>
     <style>
         #map {
             height: 600px;
             width: 100%;
         }
+
         #legend {
-          font-family: Arial, sans-serif;
-          background:#fff;
-          padding: 10px;
-          margin: 10px;
-          border: 3px solid #000;
+            font-family: Arial, sans-serif;
+            background: #fff;
+            padding: 10px;
+            margin: 10px;
+            border: 3px solid #000;
         }
     </style>
 </head>
+
 <body onLoad="init()">
     <div id="map"></div>
     <div id="legend">
         <h3>Legend</h3>
     </div>
     <script>
-        let markersData = [];
         function init() {
             window.onmessage = (event) => {
                 if (event.data) {
@@ -59,18 +61,13 @@
                     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
                     //Markers
                     for (let i = 0; i < points.length; i++) {
-                        let iconLink = get_iconImage(points[i].psi);
-                        let data = {
-                            coords: points[i].coords,
-                            content: 'psi = ' + points[i].psi + ' in ' + points[i].county,
-                            iconImage: iconLink
-                        };
-                        addMarker(data);
+                        geocode_draw(points[i]);
                     }
+                    //////////////////////////////////////////////////////////////////////////
                     function addMarker(props) {
                         var marker = new google.maps.Marker({
                             map: map,
-                            position: props.coords,
+                            position: props.coords
                         });
                         if (props.iconImage) {
                             marker.setIcon(props.iconImage);
@@ -90,7 +87,7 @@
                     function get_iconImage(psi) {
                         let iconLink = '';
                         if (psi <= 50) {
-                            iconLink = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+                            iconLink = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
                         }
                         else if ((psi > 50) && (psi <= 100)) {
                             iconLink = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
@@ -100,12 +97,44 @@
                         }
                         return iconLink;
                     }
+                    //Geocoding API
+                    function geocode_draw(props) {
+                        var geocoder = new google.maps.Geocoder();
+                        var geo_base = 'https://maps.googleapis.com/maps/api/geocode/json';
+                        var geo_key = 'key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY';
+                        var address = geo_base + '?address=' + props.county + '&' + geo_key;
+                        //address = 'https://maps.googleapis.com/maps/api/geocode/json?address=澎湖縣&key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY';
+                        geocoder.geocode({ 'address': address }, function (results, status) {
+                            if (status == 'OK') {
+                                let data = {
+                                    //coords: { lat: 24.00000, lng: 120.66387 },
+                                    coords: results[0].geometry.location,
+                                    content: 'psi = ' + props.psi + ' in ' + props.county,
+                                    iconImage: get_iconImage(props.psi)
+                                };
+                                addMarker(data);
+                            }
+                            else if (status == 'OVER_QUERY_LIMIT') {
+                                setTimeout(addMarker(data), 2000);
+                            }
+                            else {
+                                /*
+                                var data = {
+                                    coords: { lat: 25.0360, lng: 121.5640 },
+                                    content: status
+                                }
+                                addMarker(data);
+                                */
+                            }
+                        });
+                    }//end of geocode_draw()
                 }
             }
-        }
+        }//end of init()
     </script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY&callback=init">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2hge0DH6QjG-uUuOP48AV1fa45QKBhXY&callback=init&language=en">
         </script>
 </body>
+
 </html>
