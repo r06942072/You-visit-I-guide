@@ -1,8 +1,10 @@
-//Topic
-import wixLocation from 'wix-location';
+//Home
+import wixWindow from 'wix-window';
 
 $w.onReady(function () {
-	let path = '>  ';
-	path = path + wixLocation.path[0]; //not the full url just everything after the first /
-	$w("textBread").text = path;
+	load();
 });
+export function load() {
+	let language = wixWindow.multilingual.currentLanguage;
+       
+}

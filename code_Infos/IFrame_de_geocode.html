@@ -26,8 +26,9 @@
         function init() {
             window.onmessage = (event) => {
                 if (event.data) {
-                    let lang_legend = ['Gut', 'Ausreichend', 'Schlect'];
-                    points = event.data.Arr;
+                    let language = event.data.lang_language;
+                    let lang_legend = event.data.lang_legend;
+                    let points = event.data.Arr;
                     var map = new google.maps.Map(
                         document.getElementById('map'),
                         {
@@ -115,14 +116,16 @@
                                 };
                                 addMarker(data);
                             }
+                            /*
                             else if (status == 'OVER_QUERY_LIMIT') {
                                 setTimeout(addMarker(data), 2000);
                             }
+                            */
                             else {
                                 /*
-                                var data = {
+                                let data = {
                                     coords: { lat: 25.0360, lng: 121.5640 },
-                                    content: status
+                                    content: status + ' ' + props.county
                                 }
                                 addMarker(data);
                                 */

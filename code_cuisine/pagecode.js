@@ -10,9 +10,22 @@ $w.onReady(function () {
 	update_page(dropdown_value, collection_id);
 });
 export function dropdown1_change(event) {
+	wixWindow.getBoundingRect()
+	.then((windowSizeInfo) => {
+		let windowHeight = windowSizeInfo.window.height;      // 565
+		let windowWidth = windowSizeInfo.window.width;        // 1269
+		let documentHeight = windowSizeInfo.document.height;  // 780
+		let documentWidth = windowSizeInfo.document.width;    // 1269
+		let scrollX = windowSizeInfo.scroll.x;                // 0
+		let scrollY = windowSizeInfo.scroll.y;                // 120
+		//$w("#title").text = windowHeight.toString();  //phone is 601
+		//console.log(windowHeight);
+		//console.log(windowWidth);
+	});
 	let dropdown_value = $w("#dropdown1").value;
 	update_page(dropdown_value, collection_id);
 }
+
 /////////////////////////////////////////////////////////////////////
 export function update_page(dropdown_value, collection_id) {
 	get_collection(collection_id).then((obj) => {

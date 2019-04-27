@@ -26,7 +26,9 @@
         function init() {
             window.onmessage = (event) => {
                 if (event.data) {
-                    points = event.data.Arr;
+                    let language = event.data.lang_language;
+                    let lang_legend = event.data.lang_legend;
+                    let points = event.data.Arr;
                     var map = new google.maps.Map(
                         document.getElementById('map'),
                         {
@@ -37,15 +39,15 @@
                     //Legends
                     var icons = {
                         good: {
-                            name: 'Good :)',
+                            name: lang_legend[0] + ' :)',
                             iconLink: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
                         },
                         soso: {
-                            name: 'So-so :|',
+                            name: lang_legend[1] + ' :|',
                             iconLink: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
                         },
                         bad: {
-                            name: 'Bad :(',
+                            name: lang_legend[2] + ' :(',
                             iconLink: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
                         }
                     };
@@ -114,14 +116,16 @@
                                 };
                                 addMarker(data);
                             }
+                            /*
                             else if (status == 'OVER_QUERY_LIMIT') {
                                 setTimeout(addMarker(data), 2000);
                             }
+                            */
                             else {
                                 /*
-                                var data = {
+                                let data = {
                                     coords: { lat: 25.0360, lng: 121.5640 },
-                                    content: status
+                                    content: status + ' ' + props.county
                                 }
                                 addMarker(data);
                                 */
